@@ -11,6 +11,7 @@
     - Length (in categories?)
     - Category / ranking
     - Number of players / ranking
+    - Age
 - A way to build the website and publish to github pages
 - A pleasing template (probably only need one file)
 - Must have categories and ranking
