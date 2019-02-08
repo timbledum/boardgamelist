@@ -23,13 +23,15 @@ from utils import get_html
 
 
 env = Environment(
-    loader=FileSystemLoader('templates'),
-    autoescape=select_autoescape(['html', 'xml'])
+    loader=FileSystemLoader("templates"), autoescape=select_autoescape(["html", "xml"])
 )
 
 data = petl.fromjson(INPUT)
+data_formatted = data.format("weight", "{:.1f}").format(
+    "image", '<img src="{}" alt="Board game image" height="200" width="200">'
+)
 
-html = get_html(data)
+html = get_html(data_formatted)
 template = env.get_template("page.html")
 html_output = template.render(table=html)
 
