@@ -14,10 +14,25 @@ In order, this script:
 
 """
 
+INPUT = "games.json"
+
 from pathlib import Path
-from jinja2 import Environment, PackageLoader, select_autoescape
+import json
+from jinja2 import Environment, FileSystemBytecodeCache, select_autoescape
+import petl
+from utils import get_html
+
+
 env = Environment(
-    loader=PackageLoader('yourapplication', 'templates'),
+    loader=FileSystemLoader('templates'),
     autoescape=select_autoescape(['html', 'xml'])
 )
 
+with open(INPUT) as file:
+    data = petl.fromjson(json.load(file))
+
+html = get_html(data)
+template = env.get_template("page.html")
+html_output = template.render(table=html)
+
+Path("output/page.html").write_text(html_output)
