@@ -14,6 +14,13 @@ In order, this script:
 
 """
 
+from distutils.dir_util import copy_tree
+from pathlib import Path
+from jinja2 import Environment, FileSystemLoader, select_autoescape
+import petl
+from sites import pages
+from utils import get_html
+
 INPUT = "game_data.json"
 IMAGE_TAG = '<img src="{}" alt="Board game image" height="150" width="150">'
 BGG_LINK_TAG = '<a href="https://boardgamegeek.com/boardgame/{}/">{}</a>'
@@ -32,12 +39,6 @@ COLUMN_MAPPING = {
     "image": "Image",
     "weight": "Weighting (difficulty / complexity)",
 }
-
-from pathlib import Path
-from jinja2 import Environment, FileSystemLoader, select_autoescape
-import petl
-from sites import pages
-from utils import get_html
 
 
 def process_data(table):
@@ -69,3 +70,5 @@ if __name__ == "__main__":
 
     for page in pages:
         process_page(page, data_processed, pages)
+    
+    copy_tree("static", "output")
