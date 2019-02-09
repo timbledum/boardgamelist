@@ -25,7 +25,7 @@ def get_html(table):
     temp_file = FakeFile()
     table.tohtml(temp_file)
 
-    html = temp_file.getvalue().decode('utf-8')
+    html = temp_file.getvalue().decode('UTF-8')
     temp_file.close()
 
     return html
