@@ -138,5 +138,29 @@
         "Game": "Airlines Europe",
         "ID": 90419,
         "BBG name": "Airlines Europe"
-    }
+    },
+    {
+        "Game": "Samurai Gardener",
+        "ID": 150533
+    },
+    {
+        "Game": "Mille Bornes",
+        "ID": 590
+    },
+    {
+        "Game": "The Resistance",
+        "ID": 41114
+    },
+    {
+        "Game": "Codenames",
+        "ID": 178900
+    },
+    {
+        "Game": "King of the Beasts",
+        "ID": 20966
+    },
+    {
+        "Game": "Power Grid: The First Sparks",
+        "ID": 106662
+    },
 ]
