@@ -15,21 +15,23 @@ In order, this script:
 """
 
 INPUT = "game_data.json"
-IMAGE_TAG = '<img src="{}" alt="Board game image" height="200" width="200">'
+IMAGE_TAG = '<img src="{}" alt="Board game image" height="150" width="150">'
 BGG_LINK_TAG = '<a href="https://boardgamegeek.com/boardgame/{}/">{}</a>'
 BGG_LINK_FORMULA = lambda row: BGG_LINK_TAG.format(row["id"], row["image"])
 
-COLUMN_MAPPING = {"id": "",
-"name": "Name",
-"bgg_rank": "Ranking",
-"categories": "Categories",
-"min_players": "Minimum players",
-"max_players": "Maximum players",
-"playing_time": "Minutes to play",
-"year": "Year published",
-"min_age": "Minimum age",
-"image": "Image",
-"weight": "Weighting (difficulty / complexity)",}
+COLUMN_MAPPING = {
+    "id": "",
+    "name": "Name",
+    "bgg_rank": "Ranking",
+    "categories": "Categories",
+    "min_players": "Minimum players",
+    "max_players": "Maximum players",
+    "playing_time": "Minutes to play",
+    "year": "Year published",
+    "min_age": "Minimum age",
+    "image": "Image",
+    "weight": "Weighting (difficulty / complexity)",
+}
 
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -38,22 +40,32 @@ from sites import pages
 from utils import get_html
 
 
-env = Environment(
-    loader=FileSystemLoader("templates"), autoescape=select_autoescape(["html", "xml"])
-)
+def process_data(table):
+    data_weight_formatted = table.format("weight", "{:.1f}")
+    data_image_formatted = data_weight_formatted.format("image", IMAGE_TAG)
+    data_link_added = data_image_formatted.addfield(
+        "Board Game Geek link", BGG_LINK_FORMULA
+    )
+    data_final = data_link_added.rename(COLUMN_MAPPING)
+    return data_final
 
-data = petl.fromjson(INPUT)
-data_weight_formatted = data.format("weight", "{:.1f}")
-data_image_formatted = data_weight_formatted.format("image", IMAGE_TAG)
-data_link_added = data_image_formatted.addfield("Board Game Geek link", BGG_LINK_FORMULA)
-data_final = data_link_added.rename(COLUMN_MAPPING)
 
-def process_page(page, data):
+def process_page(page, data, pages):
     data_processed = page.function(data)
     html = get_html(data_processed)
     template = env.get_template("page.html")
-    html_output = template.render(table=html, name=page.name)
+    html_output = template.render(table=html, name=page.name, pages=pages)
     Path("output/{}".format(page.file)).write_text(html_output)
 
-for page in pages:
-    process_page(page, data_final)
+
+if __name__ == "__main__":
+    env = Environment(
+        loader=FileSystemLoader("templates"),
+        autoescape=select_autoescape(["html", "xml"]),
+    )
+
+    data = petl.fromjson(INPUT)
+    data_processed = process_data(data)
+
+    for page in pages:
+        process_page(page, data_processed, pages)

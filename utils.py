@@ -2,6 +2,7 @@
 
 from io import BytesIO
 
+
 class FakeFile(BytesIO):
     """Fakes out a memory based object that can be opened and written to by the
     petl html generator."""
@@ -14,7 +15,7 @@ class FakeFile(BytesIO):
 
     def __enter__(self, *args, **kwargs):
         return self
-    
+
     def __exit__(self, *args, **kwargs):
         pass
 
@@ -25,7 +26,7 @@ def get_html(table):
     temp_file = FakeFile()
     table.tohtml(temp_file)
 
-    html = temp_file.getvalue().decode('UTF-8')
+    html = temp_file.getvalue().decode("UTF-8")
     temp_file.close()
 
     return html

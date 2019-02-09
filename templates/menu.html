@@ -1,1 +1,11 @@
-<h1>Marcus' board games.</h1>
+<div class="navbar">
+    
+{% for page in pages %}
+    <a href="{{page.file}}">{{page.name}}</a>
+{% endfor %}
+
+</div>
+
+<div class="header">
+    <h1>Marcus' board games.</h1>
+</div>
