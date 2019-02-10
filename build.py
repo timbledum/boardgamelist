@@ -76,14 +76,13 @@ def main():
     data = petl.fromjson(INPUT)
     data_processed = process_data(data)
 
-    shutil.rmtree('output')
+    shutil.rmtree("output")
     Path("output/").mkdir()
 
     for page in pages:
         process_page(page, data_processed, pages, env)
-    
-    copy_tree("static", "output")
 
+    copy_tree("static", "output")
 
 
 if __name__ == "__main__":
