@@ -16,6 +16,7 @@ In order, this script:
 
 from distutils.dir_util import copy_tree
 from pathlib import Path
+import shutil
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import petl
 from sites import pages
@@ -56,7 +57,7 @@ def process_data(table):
     return data_final
 
 
-def process_page(page, data, pages):
+def process_page(page, data, pages, env):
     """Render a page (defined by sites.py) into an html file."""
     data_processed = page.function(data)
     html = get_html(data_processed)
@@ -75,8 +76,11 @@ def main():
     data = petl.fromjson(INPUT)
     data_processed = process_data(data)
 
+    shutil.rmtree('output')
+    Path("output/").mkdir()
+
     for page in pages:
-        process_page(page, data_processed, pages)
+        process_page(page, data_processed, pages, env)
     
     copy_tree("static", "output")
 
