@@ -1,0 +1,3 @@
+boardgamgeek2
+petl
+jinja2
