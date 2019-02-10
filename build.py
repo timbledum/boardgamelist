@@ -42,6 +42,11 @@ COLUMN_MAPPING = {
 
 
 def process_data(table):
+    """Do some data cleaning on JASON input.
+
+    - Turns IDs into links and image links into image tags.
+    - Shortens the weight to one decimal place.
+    """
     data_weight_formatted = table.format("weight", "{:.1f}")
     data_image_formatted = data_weight_formatted.format("image", IMAGE_TAG)
     data_link_added = data_image_formatted.addfield(
@@ -52,6 +57,7 @@ def process_data(table):
 
 
 def process_page(page, data, pages):
+    """Render a page (defined by sites.py) into an html file."""
     data_processed = page.function(data)
     html = get_html(data_processed)
     template = env.get_template("page.html")
@@ -59,7 +65,8 @@ def process_page(page, data, pages):
     Path("output/{}".format(page.file)).write_text(html_output)
 
 
-if __name__ == "__main__":
+def main():
+    """Set up jinga2 enviroment, extract data and save down to html files."""
     env = Environment(
         loader=FileSystemLoader("templates"),
         autoescape=select_autoescape(["html", "xml"]),
@@ -72,3 +79,8 @@ if __name__ == "__main__":
         process_page(page, data_processed, pages)
     
     copy_tree("static", "output")
+
+
+
+if __name__ == "__main__":
+    main()
