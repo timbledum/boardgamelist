@@ -142,7 +142,7 @@ pages.append(Page("players.html", "Games by number of players", players, True))
 
 def year(table):
     columns_to_keep = ["Board Game Geek link", "Name", "Year published", "Ranking", "Minutes to play"]
-    table_sorted = table.sort("Minutes to play")
+    table_sorted = table.sort("Year published")
     table_cut = table_sorted.cut(columns_to_keep)
     return table_cut
 
