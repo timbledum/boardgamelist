@@ -60,7 +60,7 @@ def process_page(page, data, pages, env):
     """Render a page (defined by sites.py) into an html file."""
     data_processed = page.function(data)
     template = env.get_template("page.html")
-    html_output = template.render(table=data_processed, name=page.name, pages=pages)
+    html_output = template.render(data=data_processed, name=page.name, pages=pages, category=page.category)
     Path("output/{}".format(page.file)).write_text(html_output, encoding="utf-8")
 
 

@@ -5,6 +5,19 @@
     
 <h2>{{ name }}</h2>
 
-    {{ table | petl2html | safe }}
+    {% if category %}
+
+        {% for row in data %}
+            <h3>{{row.header}}</h3>
+            {{ row.table | petl2html | safe }}
+
+        {% endfor %}
+
+    {% else %}
+
+        {{ data | petl2html | safe }}
+
+    {% endif %}
+
 </div>
 {% endblock %}
