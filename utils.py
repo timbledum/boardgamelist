@@ -5,6 +5,7 @@ import locale
 import os
 import shutil
 
+
 class FakeFile(BytesIO):
     """Fakes out a memory based object that can be opened and written to by the
     petl html generator."""
@@ -33,10 +34,11 @@ def get_html(table):
 
     return html
 
+
 def clear_directory(directory):
     for item in os.listdir(directory):
         full_path = os.path.join(directory, item)
-        if item.startswith('.'):
+        if item.startswith("."):
             continue
         elif os.path.isfile(full_path):
             os.remove(os.path.join(full_path))
