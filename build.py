@@ -62,7 +62,7 @@ def process_page(page, data, pages, env):
     html = get_html(data_processed)
     template = env.get_template("page.html")
     html_output = template.render(table=html, name=page.name, pages=pages)
-    Path("output/{}".format(page.file)).write_text(html_output)
+    Path("output/{}".format(page.file)).write_text(html_output, encoding="utf-8")
 
 
 def main():
