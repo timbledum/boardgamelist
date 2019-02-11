@@ -1,7 +1,9 @@
 """Utilities."""
 
 from io import BytesIO
-
+import locale
+import os
+import shutil
 
 class FakeFile(BytesIO):
     """Fakes out a memory based object that can be opened and written to by the
@@ -26,7 +28,17 @@ def get_html(table):
     temp_file = FakeFile()
     table.tohtml(temp_file)
 
-    html = temp_file.getvalue().decode("UTF-8")
+    html = temp_file.getvalue().decode(locale.getpreferredencoding(False))
     temp_file.close()
 
     return html
+
+def clear_directory(directory):
+    for item in os.listdir(directory):
+        full_path = os.path.join(directory, item)
+        if item.startswith('.'):
+            continue
+        elif os.path.isfile(full_path):
+            os.remove(os.path.join(full_path))
+        elif os.path.isdir(full_path):
+            shutil.rmtree(full_path)

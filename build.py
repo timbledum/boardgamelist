@@ -16,11 +16,10 @@ In order, this script:
 
 from distutils.dir_util import copy_tree
 from pathlib import Path
-import shutil
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import petl
 from sites import pages
-from utils import get_html
+from utils import get_html, clear_directory
 
 INPUT = "game_data.json"
 IMAGE_TAG = '<img src="{}" alt="Board game image" height="150" width="150">'
@@ -76,8 +75,8 @@ def main():
     data = petl.fromjson(INPUT)
     data_processed = process_data(data)
 
-    shutil.rmtree("output")
-    Path("output/").mkdir()
+    Path("output/").mkdir(exist_ok=True)
+    clear_directory("output/")
 
     for page in pages:
         process_page(page, data_processed, pages, env)
