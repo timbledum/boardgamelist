@@ -59,9 +59,8 @@ def process_data(table):
 def process_page(page, data, pages, env):
     """Render a page (defined by sites.py) into an html file."""
     data_processed = page.function(data)
-    html = get_html(data_processed)
     template = env.get_template("page.html")
-    html_output = template.render(table=html, name=page.name, pages=pages)
+    html_output = template.render(table=data_processed, name=page.name, pages=pages)
     Path("output/{}".format(page.file)).write_text(html_output, encoding="utf-8")
 
 
@@ -71,6 +70,7 @@ def main():
         loader=FileSystemLoader("templates"),
         autoescape=select_autoescape(["html", "xml"]),
     )
+    env.filters['petl2html'] = get_html
 
     data = petl.fromjson(INPUT)
     data_processed = process_data(data)

@@ -5,6 +5,6 @@
     
 <h2>{{ name }}</h2>
 
-    {{ table | safe }}
+    {{ table | petl2html | safe }}
 </div>
 {% endblock %}
