@@ -14,7 +14,7 @@ def rank(table):
     return table_cut
 
 
-pages.append(Page("index.html", "Games by rank", rank))
+pages.append(Page("rank.html", "Games by rank", rank))
 
 
 def weight(table):

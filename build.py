@@ -77,9 +77,16 @@ def main():
     data = petl.fromjson(INPUT)
     data_processed = process_data(data)
 
+    # Refresh the output directory
     Path("output/").mkdir(exist_ok=True)
     clear_directory("output/")
 
+    # Save home page
+    home_template = env.get_template("index.html")
+    html_output = home_template.render(pages=pages)
+    Path("output/index.html").write_text(html_output, encoding="utf-8")
+
+    # Save data-driven pages
     for page in pages:
         process_page(page, data_processed, pages, env)
 
