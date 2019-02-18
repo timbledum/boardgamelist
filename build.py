@@ -29,7 +29,7 @@ BGG_LINK_FORMULA = lambda row: BGG_LINK_TAG.format(row["id"], row["image"])
 COLUMN_MAPPING = {
     "id": "",
     "name": "Name",
-    "bgg_rank": "Ranking",
+    "bgg_rank": "BGG ranking",
     "categories": "Categories",
     "min_players": "Minimum players",
     "max_players": "Maximum players",
