@@ -1,0 +1,25 @@
+{% extends "_base.html" %}
+
+{% block body %}
+<div class="main">
+    
+<h2>Home</h2>
+
+<p>
+    You've reached the board game collection of Marcus! Now that the board
+    games are in the garage, it's a bit harder to see them. Now you can peruse
+    the collection at your leisure without leaving your internet browsing device!
+</p>
+
+<p>Please see below for the board games sliced and diced in various ways.</p>
+
+<ul>
+
+    {% for page in pages %}
+    <li><a href="{{page.file}}">{{page.name}}</a></li>
+    {% endfor %}
+
+</ul>
+
+</div>
+{% endblock %}
