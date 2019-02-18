@@ -8,8 +8,8 @@ pages = []
 
 
 def rank(table):
-    columns_to_keep = ["Board Game Geek link", "Name", "Ranking", "Minutes to play"]
-    table_sorted = table.sort("Ranking")
+    columns_to_keep = ["Board Game Geek link", "Name", "BGG ranking", "Minutes to play"]
+    table_sorted = table.sort("BGG ranking")
     table_cut = table_sorted.cut(columns_to_keep)
     return table_cut
 
@@ -22,7 +22,7 @@ def weight(table):
         "Board Game Geek link",
         "Name",
         "Weighting (difficulty / complexity)",
-        "Ranking",
+        "BGG ranking",
         "Minutes to play",
     ]
     table_sorted = table.sort("Weighting (difficulty / complexity)")
@@ -34,7 +34,7 @@ pages.append(Page("weighting.html", "Games by weight", weight))
 
 
 def weight(table):
-    columns_to_keep = ["Board Game Geek link", "Name", "Minutes to play", "Ranking"]
+    columns_to_keep = ["Board Game Geek link", "Name", "Minutes to play", "BGG ranking"]
     table_sorted = table.sort("Minutes to play")
     table_cut = table_sorted.cut(columns_to_keep)
     return table_cut
@@ -91,9 +91,9 @@ def categories(table):
         "World War II",
     ]
 
-    columns_to_keep = ["Board Game Geek link", "Name", "Ranking", "Minutes to play"]
+    columns_to_keep = ["Board Game Geek link", "Name", "BGG ranking", "Minutes to play"]
 
-    table_sorted = table.sort("Ranking")
+    table_sorted = table.sort("BGG ranking")
 
     tables = []
     for cat in category_list:
@@ -111,12 +111,12 @@ pages.append(Page("categories.html", "Games by category", categories, True))
 
 
 def players(table):
-    columns_to_keep = ["Board Game Geek link", "Name", "Ranking", "Minutes to play"]
+    columns_to_keep = ["Board Game Geek link", "Name", "BGG ranking", "Minutes to play"]
 
     minimum_players = int(table.stats("Minimum players").min)
     maximum_players = int(table.stats("Maximum players").max)
 
-    table_sorted = table.sort("Ranking")
+    table_sorted = table.sort("BGG ranking")
 
     def create_filter(player_count):
         return lambda row: (row["Minimum players"] <= player_count) and (
@@ -141,7 +141,7 @@ pages.append(Page("players.html", "Games by number of players", players, True))
 
 
 def year(table):
-    columns_to_keep = ["Board Game Geek link", "Name", "Year published", "Ranking", "Minutes to play"]
+    columns_to_keep = ["Board Game Geek link", "Name", "Year published", "BGG ranking", "Minutes to play"]
     table_sorted = table.sort("Minutes to play")
     table_cut = table_sorted.cut(columns_to_keep)
     return table_cut
@@ -151,11 +151,11 @@ pages.append(Page("year.html", "Games by year", year))
 
 
 def minimum_age(table):
-    columns_to_keep = ["Board Game Geek link", "Name", "Ranking", "Minutes to play"]
+    columns_to_keep = ["Board Game Geek link", "Name", "BGG ranking", "Minutes to play"]
 
     ages = sorted(set(table["Minimum age"]))
 
-    table_sorted = table.sort("Ranking")
+    table_sorted = table.sort("BGG ranking")
 
     tables = []
     for age in ages:
