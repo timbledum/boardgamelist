@@ -1,4 +1,29 @@
-"""Module for providing the constructors for the various sites."""
+"""Module for providing the constructors for the various sites.
+
+This module initiates an empty list of pages, and fills it up with the
+Pages (named tuples) as they are defined. These are used to generate
+the various sites of the website.
+
+Pages are made up of:
+
+file: The output file name
+name: The page heading and menu name
+function: The function to manipulate the core data into a certain slice of the data
+category: whether or not the data is categorical (split into categories) or just one big table
+
+This module contains a number of functions which transform the
+base data in different ways to display different views of the
+data. They each output a petl table (which can be converted
+to HTML.
+
+If the data is categorical, the function will instead return
+a list of dicts, with a header with the header text, and
+the table with the petl data.
+
+After being defined, each function is added to a Page named tuple
+and added to the pages list for use by the build.py script.
+
+"""
 
 from collections import namedtuple
 import petl
