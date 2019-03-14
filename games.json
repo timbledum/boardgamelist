@@ -162,5 +162,10 @@
     {
         "Game": "Power Grid: The First Sparks",
         "ID": 106662
+    },
+    {
+        "Game": "Gloomhaven",
+        "ID": 174430,
+        "BBG name": "Gloomhaven"
     }
 ]

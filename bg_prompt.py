@@ -23,9 +23,10 @@ GAME_PROMPT = [
         "type": "input",
         "name": "game_prompt",
         "message": "Please enter the name of the game to search or (r) to return:",
-        "validate": lambda x: True if x != "" else "Enter something!"
+        "validate": lambda x: True if x != "" else "Enter something!",
     }
 ]
+
 
 def confirm_prompt(game_name):
     question = [
@@ -33,7 +34,7 @@ def confirm_prompt(game_name):
             "type": "confirm",
             "name": "confirm_prompt",
             "message": f"Are you sure {game_name} is the correct game?",
-            "default": True
+            "default": True,
         }
     ]
     return question
@@ -51,16 +52,29 @@ def generate_game_questions(game_names):
     return question
 
 
+def generate_games_to_delete(game_names):
+    question = [
+        {
+            "type": "list",
+            "name": "game",
+            "message": "Which board game would you like to delete?",
+            "choices": game_names + ["None - don't delete nothing!"],
+        }
+    ]
+    return question
+
+
 def add_game(game):
-    data = json.load(FILE)
-    game_data =     {
-        "Game": game.name,
-        "ID": game.id
-        "BBG name": game.name
-    }
+    with open(FILE) as json_file:
+        data = load(json_file)
+
+    game_data = {"Game": game.name, "ID": game.id, "BBG name": game.name}
     data.append(game_data)
-    json.dump(data, FILE, indent=4)
+
+    with open(FILE, "w") as json_file:
+        dump(data, json_file, indent=4)
     print("Game added!")
+
 
 def new_game():
     client = BGGClient()
@@ -79,7 +93,7 @@ def new_game():
 
         game_questions = generate_game_questions(game_names)
 
-        answer = prompt(game_questions)['game']
+        answer = prompt(game_questions)["game"]
         if answer == "None - try again!":
             continue
         if prompt(confirm_prompt(answer))["confirm_prompt"]:
@@ -89,7 +103,19 @@ def new_game():
 
 
 def delete_game():
-    print("delete")
+    with open(FILE) as json_file:
+        data = load(json_file)
+    
+    names = [game["BGG name"] for game in data]
+    game_to_delete = prompt(generate_games_to_delete(sorted(names)))["game"]
+
+    if answer != "None - don't delete nothing!":
+        if prompt(confirm_prompt(answer))["confirm_prompt"]:
+            index = names.index(game_to_delete)
+            del data[index]
+            with open(FILE, "w") as json_file:
+                dump(data, json_file, indent=4)
+
 
 
 def main():
