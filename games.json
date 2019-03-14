@@ -2,170 +2,171 @@
     {
         "Game": "Roll Through the Ages: The Bronze Age",
         "ID": 37380,
-        "BBG name": "Roll Through the Ages: The Bronze Age"
+        "BGG name": "Roll Through the Ages: The Bronze Age"
     },
     {
         "Game": "Colt Express",
         "ID": 158899,
-        "BBG name": "Colt Express"
+        "BGG name": "Colt Express"
     },
     {
         "Game": "Mice and Mystics",
         "ID": 124708,
-        "BBG name": "Mice and Mystics"
+        "BGG name": "Mice and Mystics"
     },
     {
         "Game": "Lords of Waterdeep",
         "ID": 110327,
-        "BBG name": "Lords of Waterdeep"
+        "BGG name": "Lords of Waterdeep"
     },
     {
         "Game": "Exploding Kittens",
         "ID": 172225,
-        "BBG name": "Exploding Kittens"
+        "BGG name": "Exploding Kittens"
     },
     {
         "Game": "Escape: Curse of the Temple",
         "ID": 113294,
-        "BBG name": "Escape: The Curse of the Temple"
+        "BGG name": "Escape: The Curse of the Temple"
     },
     {
         "Game": "Glory to Rome",
         "ID": 19857,
-        "BBG name": "Glory to Rome"
+        "BGG name": "Glory to Rome"
     },
     {
         "Game": "Game of Thrones",
         "ID": 103343,
-        "BBG name": "A Game of Thrones: The Board Game (Second Edition)"
+        "BGG name": "A Game of Thrones: The Board Game (Second Edition)"
     },
     {
         "Game": "Wurfel Bohnanza",
         "ID": 111148,
-        "BBG name": "W\u00fcrfel Bohnanza"
+        "BGG name": "W\u00fcrfel Bohnanza"
     },
     {
         "Game": "Village",
         "ID": 104006,
-        "BBG name": "Village"
+        "BGG name": "Village"
     },
     {
         "Game": "King of Tokyo",
         "ID": 70323,
-        "BBG name": "King of Tokyo"
+        "BGG name": "King of Tokyo"
     },
     {
         "Game": "Last Will",
         "ID": 97842,
-        "BBG name": "Last Will"
+        "BGG name": "Last Will"
     },
     {
         "Game": "Settlers of Catan",
         "ID": 13,
-        "BBG name": "Catan"
+        "BGG name": "Catan"
     },
     {
         "Game": "Machi Koro",
         "ID": 143884,
-        "BBG name": "Machi Koro"
+        "BGG name": "Machi Koro"
     },
     {
         "Game": "Secret Hitler",
         "ID": 188834,
-        "BBG name": "Secret Hitler"
+        "BGG name": "Secret Hitler"
     },
     {
         "Game": "Imperial Settlers",
         "ID": 154203,
-        "BBG name": "Imperial Settlers"
+        "BGG name": "Imperial Settlers"
     },
     {
         "Game": "Bean Bohnanza",
         "ID": 11,
-        "BBG name": "Bohnanza"
+        "BGG name": "Bohnanza"
     },
     {
         "Game": "Decktet",
         "ID": 37301,
-        "BBG name": "Decktet"
+        "BGG name": "Decktet"
     },
     {
         "Game": "Dixit",
         "ID": 39856,
-        "BBG name": "Dixit"
+        "BGG name": "Dixit"
     },
     {
         "Game": "Saboteur",
         "ID": 9220,
-        "BBG name": "Saboteur"
+        "BGG name": "Saboteur"
     },
     {
         "Game": "Small World",
         "ID": 40692,
-        "BBG name": "Small World"
+        "BGG name": "Small World"
     },
     {
         "Game": "Quarriors",
         "ID": 91536,
-        "BBG name": "Quarriors!"
+        "BGG name": "Quarriors!"
     },
     {
         "Game": "Telestrations",
         "ID": 46213,
-        "BBG name": "Telestrations"
+        "BGG name": "Telestrations"
     },
     {
         "Game": "Magic Maze",
         "ID": 209778,
-        "BBG name": "Magic Maze"
+        "BGG name": "Magic Maze"
     },
     {
         "Game": "Pandemic",
         "ID": 30549,
-        "BBG name": "Pandemic"
+        "BGG name": "Pandemic"
     },
     {
         "Game": "Citadels",
         "ID": 478,
-        "BBG name": "Citadels"
+        "BGG name": "Citadels"
     },
     {
         "Game": "Mystery Express",
         "ID": 65907,
-        "BBG name": "Mystery Express"
+        "BGG name": "Mystery Express"
     },
     {
         "Game": "Airlines Europe",
         "ID": 90419,
-        "BBG name": "Airlines Europe"
+        "BGG name": "Airlines Europe"
     },
     {
         "Game": "Samurai Gardener",
-        "ID": 150533
+        "ID": 150533,
+        "BGG name": "Samurai Gardener"
     },
     {
         "Game": "Mille Bornes",
-        "ID": 590
+        "ID": 590,
+        "BGG name": "Mille Bornes"
     },
     {
         "Game": "The Resistance",
-        "ID": 41114
+        "ID": 41114,
+        "BGG name": "The Resistance"
     },
     {
         "Game": "Codenames",
-        "ID": 178900
+        "ID": 178900,
+        "BGG name": "Codenames"
     },
     {
         "Game": "King of the Beasts",
-        "ID": 20966
+        "ID": 20966,
+        "BGG name": "King of the Beasts"
     },
     {
         "Game": "Power Grid: The First Sparks",
-        "ID": 106662
-    },
-    {
-        "Game": "Gloomhaven",
-        "ID": 174430,
-        "BBG name": "Gloomhaven"
+        "ID": 106662,
+        "BGG name": "Power Grid: The First Sparks"
     }
 ]

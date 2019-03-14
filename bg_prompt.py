@@ -2,6 +2,8 @@
 
 from json import load, dump
 import sys
+import os.path
+
 
 from boardgamegeek import BGGClient, BGGItemNotFoundError
 
@@ -64,11 +66,17 @@ def generate_games_to_delete(game_names):
     return question
 
 
+def ensure_file(file):
+    if not os.path.isfile(file):
+        with open(file) as json_file:
+            dump([], json_file, indent=4)
+
+
 def add_game(game):
     with open(FILE) as json_file:
         data = load(json_file)
 
-    game_data = {"Game": game.name, "ID": game.id, "BBG name": game.name}
+    game_data = {"Game": game.name, "ID": game.id, "BGG name": game.name}
     data.append(game_data)
 
     with open(FILE, "w") as json_file:
@@ -82,14 +90,15 @@ def new_game():
     while not_found:
 
         game_search = prompt(GAME_PROMPT)["game_prompt"]
-        print(game_search)
         if game_search.lower() == "r":
             return
 
         games = client.search(game_search)
-        print(games)
 
         game_names = [game.name for game in games]
+        if not game_names:
+            print("No games found")
+            continue
 
         game_questions = generate_game_questions(game_names)
 
@@ -109,8 +118,8 @@ def delete_game():
     names = [game["BGG name"] for game in data]
     game_to_delete = prompt(generate_games_to_delete(sorted(names)))["game"]
 
-    if answer != "None - don't delete nothing!":
-        if prompt(confirm_prompt(answer))["confirm_prompt"]:
+    if game_to_delete != "None - don't delete nothing!":
+        if prompt(confirm_prompt(game_to_delete))["confirm_prompt"]:
             index = names.index(game_to_delete)
             del data[index]
             with open(FILE, "w") as json_file:
@@ -120,6 +129,7 @@ def delete_game():
 
 def main():
 
+    ensure_file(FILE)
     game_names = []
 
     cont = True
