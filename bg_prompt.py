@@ -7,63 +7,19 @@ import os.path
 
 from boardgamegeek import BGGClient, BGGItemNotFoundError
 
-from PyInquirer import prompt
+from terminalprompts import list_prompt, confirmation_prompt, input_prompt
 
 FILE = "games.json"
 
-MAIN_PROMPT = [
-    {
-        "type": "list",
-        "name": "main_prompt",
-        "message": "What would you like to do?",
-        "choices": ["Enter new game", "Delete a game", "Quit"],
-    }
-]
+MAIN_MESSAGE = "What would you like to do?"
+MAIN_CHOICES = ["Enter new game", "Delete a game", "Quit"]
 
-GAME_PROMPT = [
-    {
-        "type": "input",
-        "name": "game_prompt",
-        "message": "Please enter the name of the game to search or (r) to return:",
-        "validate": lambda x: True if x != "" else "Enter something!",
-    }
-]
+GAME_MESSAGE = "Please enter the name of the game to search or (r) to return:"
+GAME_CHOICE_MESSAGE = "Which board game is it?"
+GAME_CANCEL_OPTION = "None - try again!"
 
-
-def confirm_prompt(game_name):
-    question = [
-        {
-            "type": "confirm",
-            "name": "confirm_prompt",
-            "message": f"Are you sure {game_name} is the correct game?",
-            "default": True,
-        }
-    ]
-    return question
-
-
-def generate_game_questions(game_names):
-    question = [
-        {
-            "type": "list",
-            "name": "game",
-            "message": "Which board game is it?",
-            "choices": game_names + ["None - try again!"],
-        }
-    ]
-    return question
-
-
-def generate_games_to_delete(game_names):
-    question = [
-        {
-            "type": "list",
-            "name": "game",
-            "message": "Which board game would you like to delete?",
-            "choices": game_names + ["None - don't delete nothing!"],
-        }
-    ]
-    return question
+DELETE_MESSAGE = "Which board game would you like to delete?"
+DELETE_CANCEL_OPTION = "None - don't delete anything!"
 
 
 def ensure_file(file):
@@ -89,7 +45,10 @@ def new_game():
     not_found = True
     while not_found:
 
-        game_search = prompt(GAME_PROMPT)["game_prompt"]
+        game_search = input_prompt(
+            message=GAME_MESSAGE,
+            validation_function=lambda x: True if x != "" else "Enter something!",
+        )
         if game_search.lower() == "r":
             return
 
@@ -100,12 +59,12 @@ def new_game():
             print("No games found")
             continue
 
-        game_questions = generate_game_questions(game_names)
+        game_question_list = game_names + [GAME_CANCEL_OPTION]
 
-        answer = prompt(game_questions)["game"]
-        if answer == "None - try again!":
+        answer = list_prompt(message=GAME_CHOICE_MESSAGE, items=game_question_list)
+        if answer == GAME_CANCEL_OPTION:
             continue
-        if prompt(confirm_prompt(answer))["confirm_prompt"]:
+        if confirmation_prompt(message=f"Are you sure you would like to add {answer}?"):
             not_found = False
 
     add_game(games[game_names.index(answer)])
@@ -114,32 +73,35 @@ def new_game():
 def delete_game():
     with open(FILE) as json_file:
         data = load(json_file)
-    
+
     names = [game["BGG name"] for game in data]
-    game_to_delete = prompt(generate_games_to_delete(sorted(names)))["game"]
+    games_to_delete = sorted(names) + [DELETE_CANCEL_OPTION]
+    game_to_delete = list_prompt(message=DELETE_MESSAGE, items=games_to_delete)
 
-    if game_to_delete != "None - don't delete nothing!":
-        if prompt(confirm_prompt(game_to_delete))["confirm_prompt"]:
-            index = names.index(game_to_delete)
-            del data[index]
-            with open(FILE, "w") as json_file:
-                dump(data, json_file, indent=4)
+    if game_to_delete == DELETE_CANCEL_OPTION:
+        return
 
+    confirmation_message = f"Are you sure you would like to delete {game_to_delete}?"
+    if not confirmation_prompt(message=confirmation_message):
+        return
+
+    index = names.index(game_to_delete)
+    del data[index]
+    with open(FILE, "w") as json_file:
+        dump(data, json_file, indent=4)
 
 
 def main():
 
     ensure_file(FILE)
-    game_names = []
 
-    cont = True
-    while cont:
-        answer = prompt(MAIN_PROMPT)
-        if answer["main_prompt"] == "Quit":
-            cont = False
-        elif answer["main_prompt"] == "Enter new game":
+    while True:
+        answer = list_prompt(message=MAIN_MESSAGE, items=MAIN_CHOICES)
+        if answer == "Quit":
+            break
+        elif answer == "Enter new game":
             new_game()
-        elif answer["main_prompt"] == "Delete a game":
+        elif answer == "Delete a game":
             delete_game()
 
 
