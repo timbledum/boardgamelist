@@ -9,7 +9,7 @@ from boardgamegeek import BGGClient, BGGItemNotFoundError
 
 from terminalprompts import list_prompt, confirmation_prompt, input_prompt
 
-FILE = "games.json"
+FILE = "../game_data/games.json"
 
 MAIN_MESSAGE = "What would you like to do?"
 MAIN_CHOICES = ["Enter new game", "Delete a game", "Quit"]

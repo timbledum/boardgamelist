@@ -68,51 +68,50 @@ def weight(table):
 pages.append(Page("length.html", "Games by length", weight))
 
 
-
 def categories(table):
     category_list = [
-        #"Abstract Strategy",
+        # "Abstract Strategy",
         "Adventure",
         "American West",
         "Ancient",
-        #"Animals",
+        # "Animals",
         "Aviation / Flight",
         "Bluffing",
         "Card Game",
         "City Building",
         "Civilization",
-        #"Comic Book / Strip",
+        # "Comic Book / Strip",
         "Deduction",
         "Dice",
         "Economic",
-        #"Electronic",
+        # "Electronic",
         "Exploration",
         "Fantasy",
         "Farming",
         "Fighting",
         "Game System",
-        #"Humor",
-        #"Maze",
-        #"Medical",
+        # "Humor",
+        # "Maze",
+        # "Medical",
         "Medieval",
-        #"Miniatures",
-        #"Movies / TV / Radio theme",
-        #"Murder/Mystery",
-        #"Mythology",
+        # "Miniatures",
+        # "Movies / TV / Radio theme",
+        # "Murder/Mystery",
+        # "Mythology",
         "Negotiation",
-        #"Novel-based",
+        # "Novel-based",
         "Party Game",
-        #"Political",
-        #"Prehistoric",
-        #"Print & Play",
-        #"Racing",
+        # "Political",
+        # "Prehistoric",
+        # "Print & Play",
+        # "Racing",
         "Real-time",
         "Science Fiction",
         "Spies/Secret Agents",
-        #"Territory Building",
+        # "Territory Building",
         "Trains",
-        #"Wargame",
-        #"Word Game",
+        # "Wargame",
+        # "Word Game",
         "World War II",
     ]
 
@@ -163,10 +162,14 @@ def players(table):
 pages.append(Page("players.html", "Games by number of players", players, True))
 
 
-
-
 def year(table):
-    columns_to_keep = ["Board Game Geek link", "Name", "Year published", "BGG ranking", "Minutes to play"]
+    columns_to_keep = [
+        "Board Game Geek link",
+        "Name",
+        "Year published",
+        "BGG ranking",
+        "Minutes to play",
+    ]
     table_sorted = table.sort("Year published")
 
     table_cut = table_sorted.cut(columns_to_keep)
