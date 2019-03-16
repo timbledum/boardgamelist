@@ -18,12 +18,14 @@ Assumes the ID of the game in the input file is under ID.
 """
 
 from json import load, dump
+from pathlib import Path
 import sys
 
 from boardgamegeek import BGGClient, BGGItemNotFoundError
 
-INPUT = "games.json"
-OUTPUT = "game_data.json"
+FOLDER = "game_data"
+INPUT = Path().parent / FOLDER / "games.json"
+OUTPUT = Path().parent / FOLDER / "game_data.json"
 FIELDS = [
     "id",
     "name",

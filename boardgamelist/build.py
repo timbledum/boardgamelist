@@ -21,7 +21,13 @@ import petl
 from sites import pages
 from utils import get_html, clear_directory
 
-INPUT = "game_data.json"
+DATA_FOLDER = "game_data"
+INPUT = Path().parent / DATA_FOLDER / "game_data.json"
+
+STATIC  = Path().parent / "static"
+OUTPUT  = Path().parent / "output"
+TEMPLATES  = Path().parent / "templates"
+
 IMAGE_TAG = '<img src="{}" alt="Board game image" height="150" width="150">'
 BGG_LINK_TAG = '<a href="https://boardgamegeek.com/boardgame/{}/">{}</a>'
 BGG_LINK_FORMULA = lambda row: BGG_LINK_TAG.format(row["id"], row["image"])
@@ -63,13 +69,14 @@ def process_page(page, data, pages, env):
     html_output = template.render(
         data=data_processed, name=page.name, pages=pages, category=page.category
     )
-    Path("output/{}".format(page.file)).write_text(html_output, encoding="utf-8")
+    output_path = OUTPUT / page.file
+    output_path.write_text(html_output, encoding="utf-8")
 
 
 def main():
     """Set up jinga2 enviroment, extract data and save down to html files."""
     env = Environment(
-        loader=FileSystemLoader("templates"),
+        loader=FileSystemLoader(str(TEMPLATES)),
         autoescape=select_autoescape(["html", "xml"]),
     )
     env.filters["petl2html"] = get_html
@@ -78,19 +85,19 @@ def main():
     data_processed = process_data(data)
 
     # Refresh the output directory
-    Path("output/").mkdir(exist_ok=True)
-    clear_directory("output/")
+    OUTPUT.mkdir(exist_ok=True)
+    clear_directory(OUTPUT)
 
     # Save home page
     home_template = env.get_template("index.html")
     html_output = home_template.render(pages=pages)
-    Path("output/index.html").write_text(html_output, encoding="utf-8")
+    (OUTPUT / "index.html").write_text(html_output, encoding="utf-8")
 
     # Save data-driven pages
     for page in pages:
         process_page(page, data_processed, pages, env)
 
-    copy_tree("static", "output")
+    copy_tree(str(STATIC), str(OUTPUT))
 
 
 if __name__ == "__main__":

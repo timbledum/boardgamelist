@@ -2,14 +2,17 @@
 
 from json import load, dump
 import sys
-import os.path
+from pathlib import Path
+
 
 
 from boardgamegeek import BGGClient, BGGItemNotFoundError
 
 from terminalprompts import list_prompt, confirmation_prompt, input_prompt
 
-FILE = "../game_data/games.json"
+FILE = "games.json"
+FOLDER = "game_data"
+PATH = Path().parent / FOLDER / FILE
 
 MAIN_MESSAGE = "What would you like to do?"
 MAIN_CHOICES = ["Enter new game", "Delete a game", "Quit"]
@@ -23,19 +26,19 @@ DELETE_CANCEL_OPTION = "None - don't delete anything!"
 
 
 def ensure_file(file):
-    if not os.path.isfile(file):
+    if not file.is_file():
         with open(file) as json_file:
             dump([], json_file, indent=4)
 
 
 def add_game(game):
-    with open(FILE) as json_file:
+    with open(PATH) as json_file:
         data = load(json_file)
 
     game_data = {"Game": game.name, "ID": game.id, "BGG name": game.name}
     data.append(game_data)
 
-    with open(FILE, "w") as json_file:
+    with open(PATH, "w") as json_file:
         dump(data, json_file, indent=4)
     print("Game added!")
 
@@ -71,7 +74,7 @@ def new_game():
 
 
 def delete_game():
-    with open(FILE) as json_file:
+    with open(PATH) as json_file:
         data = load(json_file)
 
     names = [game["BGG name"] for game in data]
@@ -87,13 +90,13 @@ def delete_game():
 
     index = names.index(game_to_delete)
     del data[index]
-    with open(FILE, "w") as json_file:
+    with open(PATH, "w") as json_file:
         dump(data, json_file, indent=4)
 
 
 def main():
 
-    ensure_file(FILE)
+    ensure_file(PATH)
 
     while True:
         answer = list_prompt(message=MAIN_MESSAGE, items=MAIN_CHOICES)
