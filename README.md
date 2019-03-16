@@ -4,12 +4,14 @@
 
 ## Instructions ##
 
-1. Clone this repository
-2. Install requirements (`pip install -r requirements.txt`)
-3. Update the games.json file to include the IDs and names of the board games you wish to list. The BGG name field is not used.
-4. Run `python3 extractor.py` to download the board game information from Board Game Geek. It stores it in `game_data.json`.
-5. Run `python3 build.py` to build the website into the `output` folder.
+1. Clone this repository.
+2. Install requirements (`pip3 install -r requirements.txt`).
+3. Run `python3 buildgamelist maintain` to search for and add your games.
+4. Run `python3 buildgamelist update` to download the board game information from Board Game Geek. It stores it in `game_data/game_data.json`.
+5. Run `python3 buildgamelist build` to build the website into the `output` folder.
 6. The website is now ready to host somewhere!
+
+Note, if using on Windows, no need to append the `3` onto `python` and `pip`.
 
 ## Website concept ##
 
