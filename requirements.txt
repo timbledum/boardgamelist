@@ -1,3 +1,5 @@
 boardgamegeek2
 petl
 jinja2
+click
+PyInquirer
