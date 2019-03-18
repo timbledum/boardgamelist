@@ -89,9 +89,9 @@ def main():
     clear_directory(OUTPUT)
 
     # Save home page
-    home_template = env.get_template("index.html")
+    home_template = env.get_template("about.html")
     html_output = home_template.render(pages=pages)
-    (OUTPUT / "index.html").write_text(html_output, encoding="utf-8")
+    (OUTPUT / "about.html").write_text(html_output, encoding="utf-8")
 
     # Save data-driven pages
     for page in pages:

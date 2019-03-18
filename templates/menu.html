@@ -1,11 +1,11 @@
 <div class="navbar">
     
-    <a href="index.html">Home</a>
-
-{% for page in pages %}
+    
+    {% for page in pages %}
     <a href="{{page.file}}">{{page.name}}</a>
-{% endfor %}
-
+    {% endfor %}
+    
+    <a href="about.html">About</a>
 </div>
 
 <div class="header">
