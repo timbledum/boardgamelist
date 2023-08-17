@@ -5,7 +5,7 @@ Limited to list prompts, confirmation prompts, and text input.
 """
 
 
-from PyInquirer import prompt
+from InquirerPy import prompt
 
 
 def list_prompt(message="", items=None):

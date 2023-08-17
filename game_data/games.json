@@ -168,5 +168,25 @@
         "Game": "Power Grid: The First Sparks",
         "ID": 106662,
         "BGG name": "Power Grid: The First Sparks"
+    },
+    {
+        "Game": "Monopoly Deal Card Game",
+        "ID": 40398,
+        "BGG name": "Monopoly Deal Card Game"
+    },
+    {
+        "Game": "Enuk",
+        "ID": 36554,
+        "BGG name": "Enuk"
+    },
+    {
+        "Game": "Catan Junior",
+        "ID": 125921,
+        "BGG name": "Catan Junior"
+    },
+    {
+        "Game": "Cranium Cariboo",
+        "ID": 5718,
+        "BGG name": "Cranium Cariboo"
     }
 ]
